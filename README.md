@@ -196,7 +196,7 @@ After Pasting primary connection string.
 Press “ctrl + x” key and then enter y to save the file. 
 
 
-Step 10:
+Step 11:
 ### Run the Python file
 
 Run the following command in the terminal
@@ -209,6 +209,7 @@ We see value of temperature and humidity at output.
 This value is send to the IoT hub at every 5 seconds.
 
 ## Streaming
+
 Step 1:
 ### Create Query in Stream Analytics Job
 
