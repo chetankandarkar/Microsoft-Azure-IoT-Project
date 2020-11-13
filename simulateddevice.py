@@ -3,7 +3,7 @@ import time
 from azure.iot.device import IoTHubDeviceClient, Message
 
 CONNECTION_STRING = "HostName=chetan.azure-devices.net;DeviceId=raspberrypi;SharedAccessKey=LpRjeiuiB4iEAf20QafR+0psdgZNpKslm/ZTAYNxdLI="
-#Note : Open your IoT device from IoT hub and copy primary connection string. Paste this string at “CONNECTION_STRING” in the python file.
+#Note: Open your IoT device from IoT hub and copy primary connection string. Paste this string at “CONNECTION_STRING” in the python file.
 
 TEMPERATURE = 20.0
 HUMIDITY = 60
