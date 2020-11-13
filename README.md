@@ -48,8 +48,8 @@ If we do not having Raspberry Pi Hardware Kit than also we can Install Raspbian 
 
 ## Implementation
 
-### Step 1:
-Create Microsoft Azure Account
+Step 1:
+### Create Microsoft Azure Account
 
 1) Create free Microsoft azure account using credit card details:
 - Open [https://azure.microsoft.com/en-in/free/](https://azure.microsoft.com/en-in/free/)
@@ -69,10 +69,10 @@ Create Microsoft Azure Account
 - Now enter your Education email address they will send email you verification link.
 - You will get $100 credit point on your free azure account.
 
-![](Images/1.png)
+![](Images/01.png)
 
-## Step 2 :
-Create an IoT hub :
+Step 2 :
+### Create an IoT hub :
 
 1.	Sign in to the Azure portal.
 2.	From the Azure homepage, select the + Create a resource button, and then enter IoT Hub in the Search the Marketplace field.
@@ -88,6 +88,206 @@ Create an IoT hub :
 7.	Select Next: Review + create to review your choices. You see something similar to this screen, but with the values you selected when creating the hub
 8.	Select Create to create your new hub. Creating the hub takes a few minutes.
 
-![](Images/2.png)
+![](Images/3.png)
+
+Step 3:
+### Register a new device in the IoT hub :
+
+1. In your IoT hub navigation menu, open IoT Devices, then select New to add a device in your IoT hub.
+![](Images/4.png)
+
+2. In Create a device, provide a name for your new device, such as myDeviceId, and select Save. This action creates a device identity for your IoT hub.
+![](Images/5.png)
+
+3. After the device is created, open the device from the list in the IoT devices pane. Copy the Primary Connection String to use later.
+
+Step 4:
+### Create a Consumer Group
+
+1. Navigate to Endpoints within your IoT Hub.
+2. Click on the Events (messages/events) endpoint.
+3. Add a Consumer Group (e.g. streamanalytics consumergroup).
+4. Click Save.
+
+![](Images/04.png)
+
+Step 5:
+### Create Stream Analytics Job 
+
+1.	From the Azure homepage, select the + Create a resource button, and then enter Stream Analytics Job in the Search the Marketplace field.
+2.	Select Stream Analytics Job from the search results, and then select Create.
+3.	Enter Job name and select Resource group and location.
+4.	Select Create to create your new job. Creating the job takes a few minutes.
+
+![](Images/6.png)
+
+Step 6:
+### Setup Stream Analytics Input
+
+1.	Navigate to Inputs within your Stream Analytics resource
+2.	Click Add stream input > IoT Hub
+3.	Provide an Input Alias (e.g. iothubinput).
+4.	Select the Consumer Group (streamanalytics_consumergroup).
+5.	Click Save.
+
+![](Images/8.png)
+
+Step 7:
+### Setup Stream Analytics Output
+
+1.	Navigate to Outputs.
+2.	Click Add > Power BI.
+
+![](Images/9.png)
+
+3.	Provide an Output Alias (e.g. powerbioutput).
+4.	Provider a Dataset Name (e.g. temperatureDataset).
+5.	Provide a Table Name (e.g. temperatureTable).
+6.	Click Authorize.
+7.	Click Save.
+
+![](Images/10.png)
+
+Step 8:
+### Install ‘azure-cli-iot-ext’ in Cloud Shell
+
+1.	Open Your IoT hub 
+2.	Click on Cloud Shell from upper blue taskbar
+3.	Click on bash create
+4.	Now Run “az extension add --name azure-cli-iot-ext” command on cloud shell.
+
+![](Images/12.png)
+
+Now Click on home so you will see your IoT hub , Resource group and Stream Analytics Job there.
+
+![](Images/11.png)
+
+Step 9:
+### Run Commands on Raspberry Pi Terminal
+
+Open Raspberry Pi Emulator on VM Virtual Box
+Click on Terminal
+Run the following command
+
+- sudo pip3 install azure-iot-device
+- sudo pip3 install azure-iot-hub
+-	sudo pip3 install azure-iothub-service-client
+-	sudo pip3 install azure-iothub-device-client
+
+![](Images/13.png)
+
+![](Images/14.png)
+
+![](Images/15.png)
+
+Step 10:
+### Create Python File in Raspberry Pi
+
+Run command  “sudo nano simulateddevice.py”
+Now enter the code of simulateddevice.py
+
+#### Note: Open your IoT device from IoT hub and copy primary connection string . Paste this string at “CONNECTION_STRING” in the python file. 
+
+![](Images/17.png)
+
+![](Images/18.png)
+
+After Pasting primary connection string.
+Press “ctrl + x” key and then enter y to save the file. 
 
 
+Step 10:
+### Run the Python file
+
+Run the following command in the terminal
+#### “sudo python3 simulateddevice.py”
+
+![](Images/19.png)
+
+After Successfully Running python file
+We see value of temperature and humidity at output.
+This value is send to the IoT hub at every 5 seconds.
+
+## Streaming
+Step 1:
+### Create Query in Stream Analytics Job
+
+1.	Open Query in Stream Analytics Job
+2.	Copy and paste "query.sql" into your Stream Analytics Query window.
+3.	Click on the ellipsis next to your IoT Hub input and click Sample data from input.
+4.	Set duration to 1 minute and click OK.
+5.	Click on save query then test query. You will see event_date. temperature, humidity columns at test results.
+
+![](Images/20.png)
+
+Step 2:
+### Run the Stream Analytics Job
+
+1.	Now click on overview of Stream Analytics Job
+2.	Click on start button.
+3.	Select Job output start time ‘now’ and click on start.
+4.	After some time you will see your job is running
+
+![](Images/21.png)
+
+Step 3:
+### Create Dashboard on Power BI
+
+1.	Login on POWER BI [https://powerbi.microsoft.com/](https://powerbi.microsoft.com/)
+2.	Create a new Dashboard (My Workspace > Create >Dashboard).
+3.	Enter Dashboard as you want.
+
+![](Images/22.png)
+
+Step 4:
+### Add Tiles on Dashboard
+
+Tile 1:
+
+1.	Click Add tile
+2.	Click Custom Streaming Data
+3.	Click Next.
+4.	Select the temperatureDataset and click Next.
+5.	Populate the properties
+
+i.	Visualization Type: Card
+ii.	Fields: temperature
+iii.	Decimal Places: 2
+iv.	Title: Temperature 
+
+Tile 2:
+
+1.	Click Add tile
+2.	Click Custom Streaming Data
+3.	Click Next.
+4.	Select the temperatureDataset and click Next.
+5.	Populate the properties
+
+i.	Visualization Type: Card
+ii.	Fields: humidity
+iii.	Decimal Places: 2
+iv.	Title: humidity 
+
+![](Images/23.png)
+
+
+![](Images/25.png)
+
+## Streaming Output
+
+Here we visualize the real-time temperature and humidity data gathered from stream analytics job through Power BI.
+
+![](Images/24.png)
+
+  Real-time temperature and humidity data send from Raspberry Pi to the IoT hub at every 5 seconds. This data is stream from azure stream analytics job to the power bi.
+We visualize the real-time temperature and humidity data at Power Bi dashboard at every 5 seconds.
+
+Video Demonstration :
+
+[Click Here](https://youtu.be/M1hwA6KAB-k)
+
+Conclusion:
+
+In this project I Create a stream analytics job to analyse the real-time data. In which temperature and humidity data send from the Raspberry pi emulator to the IoT hub. So the real-time temperature and humidity data visualize from stream analytics job through power BI.Internet of things is not limited to hardware but enhancing the hardware capabilities using software backed by cloud technology. Azure IOT is a collection of Microsoft -managed cloud services that connect, monitor and control billions of IOT assets. An IOT solution is made up of one or more iot devices that communicate with one or more backend services hosted in a cloud.
+
+Internet of Things (IoT) envisages overall merging of several “things” while utilizing internet as the backbone of the communication system to establish a smart interaction between people and surrounding objects. Cloud, being the crucial component of IoT, provides valuable application specific services in many application domains. A number of IoT cloud providers are currently emerging into the market to leverage suitable and specific IoT based services. In spite of huge possible involvement of these IoT clouds, no standard cum comparative analytical study has been found across the literature databases. This article surveys popular IoT cloud platforms in light of solving several service domains such as application development, device management, system management, heterogeneity management, data management, tools for analysis, deployment, monitoring, visualization, and research. A comparison is presented for overall dissemination of IoT clouds according to their applicability. Further, few challenges are also described that the researchers should take on in near future. Ultimately, the goal of this article is to provide detailed knowledge about the existing IoT cloud service providers and their pros and cons in concrete form.
