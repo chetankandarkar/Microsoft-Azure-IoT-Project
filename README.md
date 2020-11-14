@@ -251,10 +251,10 @@ Tile 1:
 4.	Select the temperatureDataset and click Next.
 5.	Populate the properties
 
-i.	Visualization Type: Card
-ii.	Fields: temperature
-iii.	Decimal Places: 2
-iv.	Title: Temperature 
+- Visualization Type: Card
+- Fields: temperature
+- Decimal Places: 2
+- Title: Temperature 
 
 Tile 2:
 
@@ -264,10 +264,10 @@ Tile 2:
 4.	Select the temperatureDataset and click Next.
 5.	Populate the properties
 
-i.	Visualization Type: Card
-ii.	Fields: humidity
-iii.	Decimal Places: 2
-iv.	Title: humidity 
+- Visualization Type: Card
+- Fields: humidity
+- Decimal Places: 2
+- Title: humidity 
 
 ![](Images/23.png)
 
