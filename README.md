@@ -9,6 +9,12 @@ Create a stream analytics job in azure IOT. sensors collect data from various de
 2. Create a stream analytics job to analyse the real-time data.
 3. Visualize the real-time temperature and humidity data gathered from stream analytics job through Azure web service or power BI.
 
+
+## Video Demonstration :
+
+[Click Here](https://youtu.be/M1hwA6KAB-k)
+
+
 ## Block Diagram :
 
 ![](Images/Block%20Diggram.png)
@@ -283,11 +289,7 @@ Here we visualize the real-time temperature and humidity data gathered from stre
   Real-time temperature and humidity data send from Raspberry Pi to the IoT hub at every 5 seconds. This data is stream from azure stream analytics job to the power bi.
 We visualize the real-time temperature and humidity data at Power Bi dashboard at every 5 seconds.
 
-Video Demonstration :
-
-[Click Here](https://youtu.be/M1hwA6KAB-k)
-
-Conclusion:
+## Conclusion:
 
 In this project I Create a stream analytics job to analyse the real-time data. In which temperature and humidity data send from the Raspberry pi emulator to the IoT hub. So the real-time temperature and humidity data visualize from stream analytics job through power BI.Internet of things is not limited to hardware but enhancing the hardware capabilities using software backed by cloud technology. Azure IOT is a collection of Microsoft -managed cloud services that connect, monitor and control billions of IOT assets. An IOT solution is made up of one or more iot devices that communicate with one or more backend services hosted in a cloud.
 
